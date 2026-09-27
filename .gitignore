@@ -1,0 +1,7 @@
+.env
+comiccraft-env/
+huggingface_cache/
+__pycache__/
+*.pyc
+app/static/panels/*.png
+app/static/exports/*.pdf

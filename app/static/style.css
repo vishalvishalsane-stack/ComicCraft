@@ -1,0 +1,959 @@
+/* ==========================================================================
+   ComicCraft — AI Comic Story Creator Stylesheet
+   ========================================================================== */
+
+:root {
+  --primary-yellow: #FFDE00;
+  --secondary-yellow: #FFE853;
+  --action-red: #FF3344;
+  --action-red-dark: #D91D2E;
+  --hero-blue: #1A73E8;
+  --ink-black: #16161A;
+  --ink-border: #16161A;
+  --comic-bg: #F4F5F7;
+  --card-bg: #FFFFFF;
+  --border-width: 3px;
+  --comic-shadow: 5px 5px 0px var(--ink-border);
+  --comic-shadow-sm: 3px 3px 0px var(--ink-border);
+  --comic-shadow-hover: 7px 7px 0px var(--ink-border);
+  --font-display: 'Bangers', cursive, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-comic: 'Kalam', cursive, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--comic-bg);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--ink-black);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.comic-nav {
+  background: #FFFFFF;
+  border-bottom: var(--border-width) solid var(--ink-border);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-box, .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink-black);
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(2px 2px 0 var(--primary-yellow));
+}
+
+.logo-text, .brand-link {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+  color: var(--ink-black);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-pill {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 2px solid var(--ink-border);
+  border-radius: 999px;
+  background: var(--primary-yellow);
+  color: var(--ink-black);
+  box-shadow: var(--comic-shadow-sm);
+  transition: all 0.15s ease;
+}
+
+.nav-pill.secondary {
+  background: #FFFFFF;
+}
+
+.nav-pill:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--ink-border);
+}
+
+/* ==========================================================================
+   Hero & Header
+   ========================================================================== */
+
+.main-content {
+  flex: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 20px 60px;
+  width: 100%;
+}
+
+.hero-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  background: var(--action-red);
+  color: #FFFFFF;
+  padding: 4px 14px;
+  border: 2px solid var(--ink-border);
+  border-radius: 4px;
+  box-shadow: var(--comic-shadow-sm);
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  color: var(--ink-black);
+  margin-bottom: 12px;
+}
+
+.hero-title .highlight {
+  background: linear-gradient(180deg, transparent 65%, var(--primary-yellow) 65%);
+  padding: 0 4px;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: #4A4A5A;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Quick Presets
+   ========================================================================== */
+
+.presets-section {
+  background: #FFFFFF;
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: var(--comic-shadow-sm);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.presets-label {
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-btn {
+  background: #F8F9FA;
+  border: 2px solid var(--ink-border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  background: var(--primary-yellow);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 var(--ink-border);
+}
+
+/* ==========================================================================
+   Comic Form Card
+   ========================================================================== */
+
+.form-card-wrapper {
+  position: relative;
+}
+
+.form-card {
+  background: var(--card-bg);
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 14px;
+  padding: 36px 32px;
+  box-shadow: var(--comic-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-corner-ribbon {
+  position: absolute;
+  top: 18px;
+  right: -36px;
+  transform: rotate(45deg);
+  background: var(--primary-yellow);
+  color: var(--ink-black);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  padding: 4px 44px;
+  border: 2px solid var(--ink-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.comic-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-black);
+}
+
+.label-number {
+  background: var(--ink-black);
+  color: #FFFFFF;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+input[type="text"], textarea, select {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 12px 14px;
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 8px;
+  background: #FCFCFD;
+  color: var(--ink-black);
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus {
+  outline: none;
+  background: #FFFFFF;
+  border-color: var(--hero-blue);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.25);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: #6A6A7A;
+}
+
+/* ==========================================================================
+   Comic Buttons
+   ========================================================================== */
+
+.comic-btn-primary {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  letter-spacing: 1.5px;
+  padding: 14px 28px;
+  background: var(--primary-yellow);
+  color: var(--ink-black);
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 10px;
+  box-shadow: var(--comic-shadow);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.comic-btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--comic-shadow-hover);
+  background: var(--secondary-yellow);
+}
+
+.comic-btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink-border);
+}
+
+.comic-btn-secondary {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  background: #FFFFFF;
+  color: var(--ink-black);
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 8px;
+  box-shadow: var(--comic-shadow-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.comic-btn-secondary:hover {
+  background: #F0F0F0;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink-border);
+}
+
+/* ==========================================================================
+   Loading Modal
+   ========================================================================== */
+
+.loading-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 22, 26, 0.82);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.loading-modal-box {
+  background: #FFFFFF;
+  border: 4px solid var(--ink-border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 10px 10px 0 var(--action-red);
+  position: relative;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-comic-burst {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  background: var(--action-red);
+  color: #FFFFFF;
+  padding: 4px 18px;
+  border: 3px solid var(--ink-border);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--ink-border);
+  transform: rotate(-3deg);
+  margin-bottom: 12px;
+}
+
+.loading-modal-box h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.modal-subtext {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 22px;
+}
+
+.progress-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  background: #FAFAFA;
+  transition: all 0.3s ease;
+}
+
+.step-item.active {
+  border-color: var(--ink-border);
+  background: #FFF9D2;
+  box-shadow: 2px 2px 0 var(--ink-border);
+}
+
+.step-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #CCC;
+  color: #FFF;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-item.active .step-circle {
+  background: var(--action-red);
+}
+
+.step-desc {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.loading-spinner-bar {
+  height: 12px;
+  background: #EEE;
+  border: 2px solid var(--ink-border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.spinner-indicator {
+  height: 100%;
+  width: 30%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary-yellow),
+    var(--primary-yellow) 10px,
+    var(--action-red) 10px,
+    var(--action-red) 20px
+  );
+  animation: moveStripes 1.5s linear infinite;
+  border-radius: 4px;
+}
+
+@keyframes moveStripes {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+.loading-note {
+  font-size: 0.82rem;
+  color: #777;
+}
+
+/* ==========================================================================
+   Comic Preview Page
+   ========================================================================== */
+
+.preview-header {
+  background: #FFFFFF;
+  border-bottom: var(--border-width) solid var(--ink-border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.preview-nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.preview-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-tag {
+  background: var(--primary-yellow);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 2px solid var(--ink-border);
+  border-radius: 4px;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.download-btn {
+  font-size: 1.15rem;
+  padding: 10px 22px;
+  width: auto;
+}
+
+.comic-meta-hero {
+  background: linear-gradient(135deg, #FFE600 0%, #FFA800 100%);
+  border-bottom: var(--border-width) solid var(--ink-border);
+  padding: 36px 20px;
+  text-align: center;
+}
+
+.meta-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.issue-badge {
+  display: inline-block;
+  background: var(--ink-black);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  padding: 4px 14px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.comic-strip-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  letter-spacing: 1.5px;
+  line-height: 1.15;
+  color: var(--ink-black);
+  margin-bottom: 14px;
+  text-shadow: 2px 2px 0 #FFF;
+}
+
+.comic-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.comic-tags .tag {
+  background: #FFFFFF;
+  border: 2px solid var(--ink-border);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.88rem;
+  box-shadow: 2px 2px 0 var(--ink-border);
+}
+
+/* ==========================================================================
+   Comic Board & Panels
+   ========================================================================== */
+
+.comic-board {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+  width: 100%;
+}
+
+.comic-strip-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.comic-panel-card {
+  background: #FFFFFF;
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: var(--comic-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform 0.2s ease;
+}
+
+.comic-panel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--comic-shadow-hover);
+}
+
+.panel-header-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #EAEAEA;
+  padding-bottom: 12px;
+}
+
+.panel-badge {
+  background: var(--action-red);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border: 2px solid var(--ink-border);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 var(--ink-border);
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: var(--ink-black);
+}
+
+.panel-art-frame {
+  position: relative;
+  border: 3px solid var(--ink-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  max-width: 580px;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 3px 3px 0 var(--ink-border);
+}
+
+.panel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.panel-image:hover {
+  transform: scale(1.02);
+}
+
+.art-overlay-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(22, 22, 26, 0.85);
+  color: var(--primary-yellow);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--primary-yellow);
+  letter-spacing: 0.5px;
+}
+
+.panel-scene-box {
+  background: #FFFDF0;
+  border-left: 4px solid var(--primary-yellow);
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+}
+
+.scene-description {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.panel-text-narrative {
+  background: #F8F9FA;
+  border: 2px solid var(--ink-border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  position: relative;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+}
+
+.dialogue-block {
+  font-family: var(--font-comic);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--ink-black);
+}
+
+.panel-prompt-reference {
+  border-top: 1px dashed #DDD;
+  padding-top: 10px;
+}
+
+.prompt-details summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #777;
+  user-select: none;
+}
+
+.prompt-details summary:hover {
+  color: var(--hero-blue);
+}
+
+.prompt-text {
+  font-size: 0.8rem;
+  background: #F1F3F5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+  color: #444;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   Bottom Export Call to Action
+   ========================================================================== */
+
+.bottom-export-cta {
+  background: #FFFFFF;
+  border: var(--border-width) solid var(--ink-border);
+  border-radius: 14px;
+  padding: 32px 24px;
+  margin-top: 40px;
+  text-align: center;
+  box-shadow: var(--comic-shadow);
+}
+
+.cta-inner h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.cta-inner p {
+  color: #555;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.large-download {
+  width: auto;
+  font-size: 1.3rem;
+  padding: 12px 30px;
+}
+
+/* ==========================================================================
+   Export Success Page
+   ========================================================================== */
+
+.success-container {
+  flex: 1;
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.success-card {
+  background: #FFFFFF;
+  border: 4px solid var(--ink-border);
+  border-radius: 16px;
+  padding: 44px 36px;
+  text-align: center;
+  box-shadow: var(--comic-shadow);
+  width: 100%;
+}
+
+.success-icon-burst {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.success-badge {
+  display: inline-block;
+  background: var(--hero-blue);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  padding: 4px 14px;
+  border: 2px solid var(--ink-border);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 var(--ink-border);
+  margin-bottom: 12px;
+}
+
+.success-title {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  letter-spacing: 1.5px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.success-message {
+  font-size: 1.05rem;
+  color: #555;
+  margin-bottom: 28px;
+}
+
+.download-preview-box {
+  background: #F8F9FA;
+  border: 2px solid var(--ink-border);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.pdf-icon {
+  font-size: 2.2rem;
+}
+
+.pdf-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pdf-name {
+  font-weight: 800;
+  font-size: 0.98rem;
+}
+
+.pdf-path-info {
+  font-size: 0.8rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.download-now-btn {
+  width: auto;
+  font-size: 1.05rem;
+  padding: 8px 16px;
+}
+
+.go-create-btn {
+  width: auto;
+  display: inline-flex;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.preview-footer {
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.88rem;
+  color: #666;
+  border-top: 1px solid #E0E0E0;
+  background: #FFFFFF;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 24px 18px;
+  }
+
+  .comic-strip-title {
+    font-size: 2.2rem;
+  }
+
+  .comic-panel-card {
+    padding: 16px;
+  }
+
+  .download-preview-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComicCraft — AI Comic Story Creator</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="home-page">
+  <!-- Minimal Comic Navigation -->
+  <nav class="comic-nav">
+    <div class="nav-container">
+      <div class="logo-box">
+        <span class="logo-icon">💥</span>
+        <span class="logo-text">ComicCraft</span>
+      </div>
+      <div class="nav-links">
+        <a href="/docs" target="_blank" class="nav-pill">API Docs</a>
+        <a href="#quick-presets" class="nav-pill secondary">Story Ideas</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="main-content">
+    <header class="hero-header">
+      <div class="hero-badge">AI COMIC STUDIO • 5-PANEL GENERATOR</div>
+      <h1 class="hero-title">TURN YOUR IDEAS INTO <span class="highlight">EPIC COMICS</span></h1>
+      <p class="hero-subtitle">
+        Powered by <strong>Gemini Flash</strong> for storyboarding, <strong>Gemini Pro</strong> for dialogue, and <strong>Stable Diffusion</strong> for comic art.
+      </p>
+    </header>
+
+    <!-- Quick Presets -->
+    <section id="quick-presets" class="presets-section">
+      <span class="presets-label">⚡ Quick Inspiration:</span>
+      <div class="preset-chips">
+        <button type="button" class="preset-btn" data-prompt="A detective investigating glowing neon footprints in a rain-soaked metropolis" data-character="Detective Vance" data-setting="Cyberpunk Neo-Tokyo" data-tone="dramatic" data-style="comic book">Neon Noir</button>
+        <button type="button" class="preset-btn" data-prompt="An adventurous young astronomer finds an ancient star map hidden inside a glowing crystal" data-character="Astra" data-setting="Crystal Observatory in deep space" data-tone="light-hearted" data-style="anime">Space Odyssey</button>
+        <button type="button" class="preset-btn" data-prompt="A tiny wizard accidentally turns their master's potion cauldron into an adorable mischievous pancake monster" data-character="Pip the Apprentice" data-setting="Ancient Magic Forest Tower" data-tone="funny" data-style="pixel art">Pancake Panic</button>
+        <button type="button" class="preset-btn" data-prompt="A cyborg explorer reaches the ruins of Earth's first interstellar gate" data-character="Kaelen-7" data-setting="Desolate Red Canyon" data-tone="poetic" data-style="realistic">Final Horizon</button>
+      </div>
+    </section>
+
+    <!-- Creator Form Container -->
+    <div class="form-card-wrapper">
+      <div class="form-card">
+        <div class="card-corner-ribbon">ISSUE #1</div>
+
+        <form id="comicForm" action="/generate" method="POST" class="comic-form">
+          
+          <!-- Field 1: Story Prompt -->
+          <div class="form-group full-width">
+            <label for="story_prompt">
+              <span class="label-number">1</span>
+              <span class="label-text">Story Prompt (Main Idea)</span>
+            </label>
+            <textarea
+              id="story_prompt"
+              name="story_prompt"
+              rows="3"
+              required
+              placeholder="What is your comic about? E.g., A brave knight who prefers baking pastries over fighting dragons discovers an enchanted oven..."
+            ></textarea>
+            <small class="field-hint">Describe the core premise, key conflict, or goal of your story.</small>
+          </div>
+
+          <!-- Field 2: Character Name -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="character_name">
+                <span class="label-number">2</span>
+                <span class="label-text">Character Name</span>
+              </label>
+              <input
+                type="text"
+                id="character_name"
+                name="character_name"
+                required
+                placeholder="e.g. Captain Nova, Luna, Sir Crumb"
+              >
+            </div>
+
+            <!-- Field 3: Setting -->
+            <div class="form-group">
+              <label for="setting">
+                <span class="label-number">3</span>
+                <span class="label-text">Setting</span>
+              </label>
+              <input
+                type="text"
+                id="setting"
+                name="setting"
+                required
+                placeholder="e.g. Enchanted forest, futuristic city, space station, school"
+              >
+            </div>
+          </div>
+
+          <!-- Field 4: Story Tone & Field 5: Art Style -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="story_tone">
+                <span class="label-number">4</span>
+                <span class="label-text">Story Tone</span>
+              </label>
+              <select id="story_tone" name="story_tone" required>
+                <option value="dramatic">Dramatic — High stakes & intense moments</option>
+                <option value="funny">Funny — Comedy, slapstick & witty banter</option>
+                <option value="light-hearted" selected>Light-hearted — Whimsical, fun & adventurous</option>
+                <option value="poetic">Poetic — Atmospheric, moody & contemplative</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="art_style">
+                <span class="label-number">5</span>
+                <span class="label-text">Art Style</span>
+              </label>
+              <select id="art_style" name="art_style" required>
+                <option value="comic book" selected>Comic Book — Bold inks, dynamic colors & halftone</option>
+                <option value="anime">Anime — Expressive lines, vibrant cell shading</option>
+                <option value="pixel art">Pixel Art — Retro 16-bit arcade aesthetics</option>
+                <option value="realistic">Realistic — Cinematic lighting, natural textures</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button type="submit" id="submitBtn" class="comic-btn-primary">
+              <span class="btn-stars">✨</span>
+              <span class="btn-text">CREATE MY COMIC STRIP</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Interactive Generation Loading Modal -->
+  <div id="loadingModal" class="loading-modal-backdrop" style="display: none;">
+    <div class="loading-modal-box">
+      <div class="modal-comic-burst">💥 POW!</div>
+      <h2>Crafting Your Comic Book...</h2>
+      <p class="modal-subtext">Our AI artists and storytellers are working their magic.</p>
+      
+      <div class="progress-steps">
+        <div class="step-item active" id="step1">
+          <div class="step-circle">1</div>
+          <div class="step-desc">Gemini Flash: Outlining 5-panel storyboard</div>
+        </div>
+        <div class="step-item" id="step2">
+          <div class="step-circle">2</div>
+          <div class="step-desc">Gemini Pro: Writing narration & dialogue</div>
+        </div>
+        <div class="step-item" id="step3">
+          <div class="step-circle">3</div>
+          <div class="step-desc">Stable Diffusion: Drawing comic panels</div>
+        </div>
+        <div class="step-item" id="step4">
+          <div class="step-circle">4</div>
+          <div class="step-desc">FPDF: Assembling PDF comic strip</div>
+        </div>
+      </div>
+
+      <div class="loading-spinner-bar">
+        <div class="spinner-indicator"></div>
+      </div>
+      <p class="loading-note">Generating 5 panels locally with AI. On CPU this may take 15-25 minutes — please leave this window open and don't refresh.</p>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

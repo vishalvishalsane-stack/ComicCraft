@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Export Success — ComicCraft</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="export-success-page">
+  <nav class="comic-nav">
+    <div class="nav-container">
+      <div class="logo-box">
+        <a href="/" class="brand-link">
+          <span class="logo-icon">💥</span>
+          <span class="logo-text">ComicCraft</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="success-container">
+    <div class="success-card">
+      <div class="success-icon-burst">🎉</div>
+      <div class="success-badge">MISSION ACCOMPLISHED</div>
+      <h1 class="success-title">COMIC EXPORTED SUCCESSFULLY!</h1>
+      
+      <p class="success-message">
+        Your AI comic strip <strong>{{ title }}</strong> has been fully rendered, formatted, and converted into an authentic multi-page PDF comic.
+      </p>
+
+      {% if pdf_path %}
+      <div class="download-preview-box">
+        <span class="pdf-icon">📄</span>
+        <div class="pdf-details">
+          <div class="pdf-name">Full 5-Panel Comic PDF</div>
+          <div class="pdf-path-info">{{ pdf_path }}</div>
+        </div>
+        <a href="{{ pdf_path }}" download class="comic-btn-primary download-now-btn">
+          📥 Download PDF Now
+        </a>
+      </div>
+      {% endif %}
+
+      <div class="success-actions">
+        <a href="/" class="comic-btn-primary go-create-btn">
+          ✨ Go Create Another Comic
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="preview-footer">
+    <p>ComicCraft AI Studio • Build your next universe in seconds</p>
+  </footer>
+</body>
+</html>

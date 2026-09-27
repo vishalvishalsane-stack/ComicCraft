@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ comic_title }} — ComicCraft Preview</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="preview-page">
+
+  <!-- Header Bar -->
+  <header class="preview-header">
+    <div class="preview-nav-content">
+      <div class="preview-brand">
+        <a href="/" class="brand-link">💥 ComicCraft</a>
+        <span class="preview-tag">Comic Strip Preview</span>
+      </div>
+      <div class="preview-actions">
+        <a href="/" class="comic-btn-secondary">← Create Another</a>
+        <a href="{{ pdf_path }}" download class="comic-btn-primary download-btn" id="downloadPdfBtn">
+          📥 Download Your Comic as PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Comic Strip Hero Metadata -->
+  <section class="comic-meta-hero">
+    <div class="meta-inner">
+      <span class="issue-badge">OFFICIAL COMIC RELEASE • 5 PANELS</span>
+      <h1 class="comic-strip-title">{{ comic_title }}</h1>
+      <div class="comic-tags">
+        <span class="tag"><strong>Protagonist:</strong> {{ character_name }}</span>
+        <span class="tag"><strong>Setting:</strong> {{ setting }}</span>
+        <span class="tag"><strong>Tone:</strong> {{ story_tone | capitalize }}</span>
+        <span class="tag"><strong>Style:</strong> {{ art_style | capitalize }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Comic Layout Grid -->
+  <main class="comic-board">
+    <div class="comic-strip-container">
+      
+      {% for panel in layout %}
+      <article class="comic-panel-card" id="panel-{{ panel.panel_number }}">
+        <!-- Panel Header -->
+        <div class="panel-header-banner">
+          <span class="panel-badge">PANEL {{ panel.panel_number }}</span>
+          <h2 class="panel-title">{{ panel.title }}</h2>
+        </div>
+
+        <!-- Panel Artwork Container -->
+        <div class="panel-art-frame">
+          <img
+            src="{{ panel.image_path }}"
+            alt="Panel {{ panel.panel_number }}: {{ panel.title }}"
+            class="panel-image"
+            loading="lazy"
+          >
+          <div class="art-overlay-badge">AI ART • {{ art_style | upper }}</div>
+        </div>
+
+        <!-- Scene Description (italic) -->
+        <div class="panel-scene-box">
+          <p class="scene-description"><em>Scene: {{ panel.scene_description }}</em></p>
+        </div>
+
+        <!-- Caption + Narration Text -->
+        <div class="panel-text-narrative">
+          <div class="dialogue-block">
+            {{ panel.text | replace('\n', '<br>') | safe }}
+          </div>
+        </div>
+
+        <!-- Image Prompt Reference -->
+        <div class="panel-prompt-reference">
+          <details class="prompt-details">
+            <summary class="prompt-toggle">🔍 Image Generation Prompt Reference</summary>
+            <p class="prompt-text">{{ panel.image_prompt }}</p>
+          </details>
+        </div>
+      </article>
+      {% endfor %}
+
+    </div>
+
+    <!-- Bottom Download Call to Action -->
+    <div class="bottom-export-cta">
+      <div class="cta-inner">
+        <h2>Love your comic strip?</h2>
+        <p>Save it to your device as a beautifully formatted multi-page PDF comic book.</p>
+        <div class="cta-buttons">
+          <a href="{{ pdf_path }}" download class="comic-btn-primary large-download">
+            📥 Download Your Comic as PDF
+          </a>
+          <a href="/export-success?pdf_path={{ pdf_path }}&title={{ comic_title }}" class="comic-btn-secondary">
+            View Export Details →
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="preview-footer">
+    <p>Created with <strong>ComicCraft</strong> — Powered by Gemini Flash, Gemini Pro, Stable Diffusion & FPDF</p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
